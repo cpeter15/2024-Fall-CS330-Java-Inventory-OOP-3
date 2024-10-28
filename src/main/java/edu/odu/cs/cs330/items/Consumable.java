@@ -1,7 +1,5 @@
 package edu.odu.cs.cs330.items;
 
-import java.util.Objects;
-
 /**
  * This class represents one Consumable Item--as found in most video games.
  * This includes food.
