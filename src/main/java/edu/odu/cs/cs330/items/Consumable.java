@@ -1,5 +1,7 @@
 package edu.odu.cs.cs330.items;
 
+import java.util.Objects;
+
 /**
  * This class represents one Consumable Item--as found in most video games.
  * This includes food.
@@ -43,9 +45,10 @@ public class Consumable extends Item {
      */
     public Consumable()
     {
-        super("[Placeholder]");
-
-        // Complete the remainder of this method
+        // super("[Placeholder]");
+        super("");
+        effect = "";
+        uses = 0;
     }
 
     /**
@@ -98,13 +101,15 @@ public class Consumable extends Item {
     public int requiredNumberOfValues()
     {
         // Replace this with the correct value
-        return -1;
+        return 3;
     }
 
     @Override
     public void fromTokens(String[] tokens)
     {
-
+        this.setName(tokens[0]);
+        this.setEffect(tokens[1]);
+        this.setNumberOfUses(Integer.parseInt(tokens[2])); 
     }
 
     /**
@@ -114,7 +119,13 @@ public class Consumable extends Item {
     public Item clone()
     {
         // Replace the next line
-        return null;
+        Consumable cpy = new Consumable();
+
+        cpy.setName(name);
+        cpy.setEffect(effect);
+        cpy.setNumberOfUses(uses);
+
+        return cpy;
     }
 
     /**
@@ -129,8 +140,21 @@ public class Consumable extends Item {
             return false;
         }
 
-        // Replace the "return false" with your logic
-        return false;
+        Consumable rhsConsumable = (Consumable) rhs;
+
+        if (this == rhs) {
+            return false;
+        }
+
+        if (!this.name.equals(rhsConsumable.getName())) {
+            return false;
+        }
+
+        if (!this.effect.equals(rhsConsumable.getEffect())) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -142,7 +166,7 @@ public class Consumable extends Item {
     @Override
     public int hashCode()
     {
-        return -1;
+        return this.name.hashCode() + this.effect.hashCode();
     }
 
     /**
@@ -151,6 +175,6 @@ public class Consumable extends Item {
     @Override
     public String toString()
     {
-        return "Make sure to check Armour.toString for hints.";
+        return String.format(FMT_STR, name, effect, uses);
     }
 }
