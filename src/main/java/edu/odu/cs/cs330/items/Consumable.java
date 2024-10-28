@@ -141,7 +141,7 @@ public class Consumable extends Item {
         Consumable rhsConsumable = (Consumable) rhs;
 
         if (this == rhs) {
-            return false;
+            return true;
         }
 
         if (!this.name.equals(rhsConsumable.getName())) {
